@@ -1,10 +1,20 @@
 "use strict";
 
-app.controller("ItemListCtrl", function ($scope, ItemStorage, searchTermData) {
+app.controller("ItemListCtrl", function($scope, ItemStorage, searchTermData) {
     $scope.searchText = searchTermData;
     ItemStorage.getItemList()
-    .then((itemCollection) => {
-        $scope.items = itemCollection;
+    .then((itemCollectionArr) => {
+        $scope.items = itemCollectionArr;
+        console.log($scope.items)
+    })
 
-    });
+    $scope.itemDelete = (itemId) => {
+      ItemStorage.deleteItem(itemId)
+      .then((response)=> {
+        ItemStorage.getItemList()
+        .then((itemCollectionArr) =>{
+          $scope.items = itemCollectionArr;
+        });
+      });
+    };
 });
