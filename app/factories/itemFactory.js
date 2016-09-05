@@ -10,6 +10,7 @@ app.factory("ItemStorage", ($q, $http, FirebaseURL) => {
           //Angular does the parsing of the object for you, just like AJAX or getJSON
           .success((itemObject)=>{
             if (itemObject !== null){
+              console.log(itemObject)
               Object.keys(itemObject).forEach((key)=>{
                 itemObject[key].id = key;
                 items.push(itemObject[key]);
@@ -37,14 +38,31 @@ app.factory("ItemStorage", ($q, $http, FirebaseURL) => {
         });
     };
 
-    let deleteItem = (itemId) => {
-        return $q((resolve, reject) =>{
+    let deleteItem = (itemId)=> {
+        return $q((resolve, reject)=>{
             $http.delete(`${FirebaseURL}/items/${itemId}.json`)
               .success((objFromFirebase) => {
                 resolve(objFromFirebase);
               });
+        });
 
+    };
+    let getOneItem = (itemId) => {
+        return $q((resolve, reject) =>{
+          $http.pop(`${FirebaseURL}/items/${itemId}.json`)
+            .success((objFromFirebase) => {
+              resolve(objFromFirebase);
+            });
         });
     };
-    return {getItemList, postNewItem, deleteItem};
+    let updateItem = (itemId) => {
+        return $q((resolve, reject) =>{
+          $http.update(`${FirebaseURL}/items/${itemId}.json`)
+            .success((objFromFirebase) => {
+              resolve(objFromFirebase);
+            });
+        });
+    };
+    return {getItemList, postNewItem, deleteItem, getOneItem, updateItem};
+
 });
