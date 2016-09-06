@@ -47,7 +47,7 @@ app.factory("ItemStorage", ($q, $http, FirebaseURL) => {
         });
 
     };
-    let getOneItem = (itemId) => {
+    let getSingleItem = (itemId) => {
         return $q((resolve, reject) =>{
           $http.pop(`${FirebaseURL}/items/${itemId}.json`)
             .success((objFromFirebase) => {
@@ -63,6 +63,6 @@ app.factory("ItemStorage", ($q, $http, FirebaseURL) => {
             });
         });
     };
-    return {getItemList, postNewItem, deleteItem, getOneItem, updateItem};
+    return {getItemList, postNewItem, deleteItem, getSingleItem, updateItem};
 
 });

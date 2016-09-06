@@ -9,6 +9,10 @@ app.controller("TodoCtrl", function($scope, $location) {
     $scope.allItem = function (){
         $location.url('/items/list');
     };
+    $scope.EditItem = function(){
+        $location.url('/items/{{item.id}}');
+    };
+
 
     $scope.addNewItem = function (){
         $scope.newTask.isCompleted = false;

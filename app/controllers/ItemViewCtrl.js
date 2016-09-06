@@ -1,11 +1,24 @@
 "use strict"
-app.controller("ItemViewCtrl", function( $scope, ItemStorage, $routeParams){
-  $scope.items =[];
-  ItemStorage.getItemList()
-  .then((itemCollectionArr)=>{
-    $scope.items = itemCollectionArr;
-    $scope.selctedItem =$scope.items.filter(function(item){
-      return item.id === $routeParams.itemId
-    })[0];
+app.controller ("EditItemCtrl", function($scope, ItemStorage, $location, $routeParams){
+  $scope.newtask ={
+    assignedTo:"",
+    dependencies: "",
+    dueDate: "",
+    isCompleted: "",
+    location:"",
+    task:"",
+    urgency:""
+  };
+
+$scope.editItem = function(){
+  ItemStorage.getSingleItem($scope.newTask)
+  .then(function(data){
+    $location.url("#/items/{{item.id}}");
   });
+ };
+$scope.updateItem = function(){
+  ItemStorage.putItem($routeParams.itemId. $scope.editTask);
+  };
+$scope.editItem();
 });
+

@@ -5,7 +5,7 @@
 <div class="row">
 <!-- TODO: Repeat over our todo list items and setup filtering by search term. Easy peasy -->
 <div ng-repeat="item in items | filter: {task: searchText.search}">
-  <div class="panel panel-default" ng-click="getOneItem">
+  <div class="panel panel-default" ng-click="#/items/{{item.id}}" >
     <div class="panel-body">
       <div class="col-xs-1"><input type="checkbox" name=""/></div>
       <div class="col-xs-7"><a ng-href="#/items/{{item.id}}"></a>{{item.task}}</div>

@@ -12,24 +12,10 @@ app.config(function($routeProvider){
             templateUrl:'partials/items-form.html',
             controller: 'ItemNewCtrl'
         }).
-        when('/items/new/:itemId', {
-            templateUrl: 'partials/item-details.html',
+        when('#/items/{{item.id}}',{
+            templateUrl:'partials/item-details.html',
             controller:'ItemViewCtrl'
-
         }).
         otherwise('/items/list');
 });
 
-
-// 'use strict'
-
-// var app = angular.module("TodoApp", ["ngRoute"])
-// .constant('FirebaseURL', 'https://ng-2-firebase.firebaseio.com/')
-
-// app.config(function($routeProvider){
-//     $routeProvider
-//     .when('/items/list', {
-//         templateUrl: 'partials/items-list',
-//         controller: 'ItemListCtrl'
-//     })
-// })
